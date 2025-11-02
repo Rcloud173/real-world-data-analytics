@@ -80,9 +80,9 @@ This project is licensed under the **MIT License** — free to use, modify, and 
 ---
 
 ## 👥 Contributors
-**Project Lead:** *[Your Name / Team Name]*  
+**Project Lead:** *Rcloud173*  
 **Domain:** Data Science • Health Analytics • Global Epidemiology  
-**Contact:** [your.email@example.com]
+**Contact:** amirshaikh17543@gmail.com
 
 ---
 
