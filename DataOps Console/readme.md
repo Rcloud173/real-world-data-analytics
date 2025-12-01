@@ -71,16 +71,6 @@ For each major database feature, the project ensures:
 
 ---
 
-## 📦 Project Structure
-
-dataops-console/
-│── app.py # Main Streamlit application
-│── db_init.sql # MySQL schema, functions, procedures, views
-│── .env # DB credentials (ignored in Git)
-│── README.md # Documentation
-
----
-
 ## ⚖️ Ethical Considerations
 
 - No user-sensitive data is stored
