@@ -4,8 +4,8 @@ def connect_to_db():
     return mysql.connector.connect(
     host="localhost",
     user="root",
-    password="CampusX@21",
-    database="dummy_project")
+    password="amiramir123#",
+    database="data_ops")
 
 
 def get_basic_info(cursor):

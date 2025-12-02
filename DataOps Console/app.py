@@ -115,3 +115,58 @@ elif option == "Operational Tasks":
                 st.dataframe(df)
             else:
                 st.info("No History found for the product Selected")
+
+#---------- Place reorder -----------
+    if selected_task=="Place Reorder":
+        st.header("Place an Reorder")
+
+        products = get_all_products(cursor)
+        product_names = [p['product_name'] for p in products]
+        product_ids = [p['product_id'] for p in products]
+
+        selected_product_name = st.selectbox("Select An product", options=product_names)
+        reorder_qty=st.number_input("Reorder Quantity", min_value=1, step=1)
+
+        if st.button("Place Reorder"):
+            if not selected_product_name:
+                st.error("please Select an Product")
+            elif reorder_qty<=0:
+                st.error("Reorder Quantity must be greater than 0")
+            else:
+                selected_product_id = product_ids[product_names.index(selected_product_name)]
+                try:
+                    place_reorder(cursor, db, selected_product_id, reorder_qty)
+                    st.success(f"Order placed for {selected_product_name} with quantity {reorder_qty}")
+                except Exception as e:
+                    st.error(f"Error Placing reorder {e}")
+
+
+#----------------RECEIVING AN ORDER ------------------
+
+    elif selected_task=="Receive Reorder":
+        st.header("Mark Reorder as Received")
+        # Fetch orders in Ordered Stage
+        pending_reorders= get_pending_reorders(cursor)
+        if not pending_reorders:
+            st.info("No Pending Orders to Receive.")
+        else:
+            reorder_ids = [r['reorder_id'] for r in pending_reorders]
+            reorder_labels=[f"ID {r['reorder_id']} - {r['product_name']}" for r in  pending_reorders]
+
+            selected_label =st.selectbox("Select Reorder to mark As Received", options=reorder_labels)
+
+            if selected_label:
+                selected_reorder_id= reorder_ids[reorder_labels.index(selected_label)]
+
+                if st.button("Mark as Received"):
+                    try:
+                       mark_reorder_as_received(cursor, db  , selected_reorder_id)
+                       st.success(f"Reorder ID {selected_reorder_id} marked as received")
+                    except Exception as e:
+                        st.error(f"Erroe {e}")
+
+
+
+
+
+
