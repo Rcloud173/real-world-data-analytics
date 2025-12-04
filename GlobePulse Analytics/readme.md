@@ -98,28 +98,6 @@ All insights are documented in:
 
 ---
 
-## 🧱 Pipeline Architecture
-
-**High-Level Workflow:**
-
-```text
-🌐 Public API(s)
-       ↓
-🐍 Python Script (extract.py)
-  - Fetch JSON data
-  - Normalize + clean
-  - Merge across indicators/years
-  - Output processed table
-       ↓
-📊 Power BI
-  - Connects to Python script
-  - Loads processed dataframe
-  - Builds visuals + measures
-       ↓
-🔁 Auto-Refresh
-  - Refresh triggers re-run Python
-  - Dashboard always uses latest API data
-
 ## ⚖️ Ethical & Practical Considerations
 
 - Uses **only public, aggregated, non-personal data**
@@ -190,4 +168,30 @@ Free to **use**, **modify**, and **distribute** with appropriate attribution.
 ---
 
 > *"If data reflects the world, real-time data reflects its future."* 🌍
+
+---
+
+## 🧱 Pipeline Architecture
+
+**High-Level Workflow:**
+
+```text
+🌐 Public API(s)
+       ↓
+🐍 Python Script (extract.py)
+  - Fetch JSON data
+  - Normalize + clean
+  - Merge across indicators/years
+  - Output processed table
+       ↓
+📊 Power BI
+  - Connects to Python script
+  - Loads processed dataframe
+  - Builds visuals + measures
+       ↓
+🔁 Auto-Refresh
+  - Refresh triggers re-run Python
+  - Dashboard always uses latest API data
+
+
 
