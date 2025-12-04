@@ -67,8 +67,8 @@ Each folder in this repository represents a **complete project**, including:
 
 | Status | Project               | Description |
 | :----: | :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
-|   🚀   | **DataOps Console**   | A Streamlit-powered internal tool that executes MySQL stored procedures, views, and functions through a SQL-free UI for inventory, orders, and stock operations. |
-|   🕒   | **CancerScope**       | A global data-driven initiative uncovering actionable insights into cancer risks, treatment disparities, and patient outcomes through advanced analytics. |
+|   ✅   | **DataOps Console**   | A Streamlit-powered internal tool that executes MySQL stored procedures, views, and functions through a SQL-free UI for inventory, orders, and stock operations. |
+|   ✅   | **CancerScope**       | A global data-driven initiative uncovering actionable insights into cancer risks, treatment disparities, and patient outcomes through advanced analytics. |
 
 
 ---
