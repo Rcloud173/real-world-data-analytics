@@ -68,40 +68,52 @@ select product_id ,product_name, stock_quantity, reorder_level  from products wh
 
 
 -- 10  Add an new product to the database
-delimiter $$
-create procedure AddNewProductManualID(
-   in p_name varchar(255),
-   in p_category  varchar(100),
-   in p_price decimal(10,2),
-   in p_stock int,
-   in p_reorder int,
-   in p_supplier int
+DELIMITER $$
+
+CREATE PROCEDURE AddNewProductManualID(
+   IN p_name VARCHAR(255),
+   IN p_category VARCHAR(100),
+   IN p_price DECIMAL(10,2),
+   IN p_stock INT,
+   IN p_reorder INT,
+   IN p_supplier INT
 )
-Begin
-  declare  new_prod_id int;
-  declare  new_shipment_id int;
-  declare new_entry_id int;
-  
-  #make chnages in product table
-  #generate the product id
-  select max(product_id)+1  into  new_prod_id from products;
-  insert into products( product_id,product_name , category, price , stock_quantity, reorder_level, supplier_id)
-  values(new_prod_id,p_name,p_category,p_price,p_stock,p_reorder,p_supplier);
-  
-  
-  #make changes in shipment table
-  # generate the shipment id
-  select max(shipment_id)+1 into new_shipment_id from shipments;
-  insert into shipments (shipment_id , product_id , supplier_id , quantity_received, shipment_date)
-  values(new_shipment_id,new_prod_id,p_supplier,p_stock, curdate());
-  
-  
-  # make chnages in stock_entries
-  select max(entry_id)+1 into new_entry_id from stock_entries;
-  insert  into stock_entries(entry_id , product_id , change_quantity , change_type , entry_date)
-  values (new_entry_id,new_prod_id, p_stock, "Restock", curdate());
-end $$
-Delimiter ;
+BEGIN
+  DECLARE new_prod_id INT;
+  DECLARE new_shipment_id INT;
+  DECLARE new_entry_id INT;
+
+  START TRANSACTION;
+
+  -- Generate product_id safely
+  SELECT IFNULL(MAX(product_id), 0) + 1 
+    INTO new_prod_id 
+    FROM products;
+
+  INSERT INTO products (product_id, product_name, category, price, stock_quantity, reorder_level, supplier_id)
+  VALUES (new_prod_id, p_name, p_category, p_price, p_stock, p_reorder, p_supplier);
+
+  -- Generate shipment_id safely
+  SELECT IFNULL(MAX(shipment_id), 0) + 1
+    INTO new_shipment_id
+    FROM shipments;
+
+  INSERT INTO shipments (shipment_id, product_id, supplier_id, quantity_received, shipment_date)
+  VALUES (new_shipment_id, new_prod_id, p_supplier, p_stock, CURDATE());
+
+  -- Generate entry_id safely
+  SELECT IFNULL(MAX(entry_id), 0) + 1
+    INTO new_entry_id
+    FROM stock_entries;
+
+  INSERT INTO stock_entries (entry_id, product_id, change_quantity, change_type, entry_date)
+  VALUES (new_entry_id, new_prod_id, p_stock, 'Restock', CURDATE());
+
+  COMMIT;
+END $$
+
+DELIMITER ;
+
 
 call AddNewProductManualID('Smart Watch', 'Electronics', 99.99,100,25,5)
 
