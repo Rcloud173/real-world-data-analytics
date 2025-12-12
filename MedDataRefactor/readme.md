@@ -196,7 +196,7 @@ This project is licensed under the **MIT License** — free to use, modify, and 
 
 ## 👥 Contributors
 **Project Lead:** *Rcloud173*  
-**Domain:** Data Science • Health Analytics • Global Epidemiology  
+**Domain:** Data Analytics • Data Engineering • Information Systems 
 **Contact:** amirshaikh17543@gmail.com
 
 ---
