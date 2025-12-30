@@ -30,7 +30,7 @@ create table PATIENTS
     Gender varchar(1),
     phone varchar(15),
     check (gender in('m','f','o'))
-)
+);
 
 
 -- CREATE APPOINTMENT
@@ -80,6 +80,84 @@ create table LABREPORTS
 
 
 -- INSERTION IN DATABASE
+
+-- INSERTING VALUES INTO DEPARTMENT TABLE
+SELECT * FROM HOSPITAL_DATA;
+
+SELECT `Departments.DepartmentID` FROM HOSPITAL_DATA;
+
+
+SELECT concat('select',group_concat(concat('`',COLUMN_NAME ,'`')), 'from hospital_data')
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE 
+TABLE_SCHEMA='meddata'
+AND TABLE_NAME='HOSPITAL_DATA'
+and COLUMN_NAME LIKE 'Departments.%';
+insert into departments(departmentID,name) 
+select`Departments.DepartmentID`,`Departments.Name`from hospital_data
+where `Departments.DepartmentID`<>'';
+
+select * from departments;
+
+-- INSERTING VALUES INTO DOCTORS TABLE
+select concat('select', group_concat(concat('`',COLUMN_NAME,'`')), 'form hospital_data')
+from INFORMATION_SCHEMA.COLUMNS
+where
+table_schema = 'meddata'
+AND table_name = 'hospital_data'
+and column_name like 'doctors.%';
+
+INSERT INTO DOCTORS( DepartmentID, DoctorID,Name,Role, Specialization)
+select`Doctors.DepartmentID`,`Doctors.DoctorID`,`Doctors.Name`,
+`Doctors.Role`,`Doctors.Specialization`from hospital_data
+WHERE `Doctors.DepartmentID`<>'';
+
+select * from DOCTORS;
+
+
+-- PATIENT 
+SELECT concat('select',group_concat(concat('`',COLUMN_NAME ,'`')), 'from hospital_data')
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE 
+TABLE_SCHEMA='meddata'
+AND TABLE_NAME='HOSPITAL_DATA'
+and COLUMN_NAME LIKE 'PATIENTS.%';
+
+INSERT INTO PATIENTS (PatientID, NAME, DATEOFBIRTH, GENDER, PHONE)
+SELECT 
+  `Patients.PatientID`,
+  `Patients.Name`,
+  STR_TO_DATE(`Patients.DateOfBirth`, '%d-%m-%Y'),  -- Correct format
+  `Patients.Gender`,
+  `Patients.Phone`
+FROM HOSPITAL_DATA
+WHERE `Patients.PatientID` <> '';
+
+select * from patients
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
