@@ -65,11 +65,13 @@ Each folder in this repository represents a **complete project**, including:
 
 ## 📊 Current & Upcoming Projects
 
-| Status | Project               | Description |
-| :----: | :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
-|   ✅   | **DataOps Console**   | A Streamlit-powered internal tool that executes MySQL stored procedures, views, and functions through a SQL-free UI for inventory, orders, and stock operations. |
-|   ✅   | **CancerScope**       | A global data-driven initiative uncovering actionable insights into cancer risks, treatment disparities, and patient outcomes through advanced analytics. |
-|   ✅   | **GlobePulse Analytics** | A real-time global development monitoring system using automated API pipelines, Python-powered processing, and Power BI dashboards to track economic, health, digital, and environmental indicators. |
+| Status | Project | Description |
+| :----: | :------ | :---------- |
+| ✅ | **DataOps Console** | A Streamlit-powered internal tool that executes MySQL stored procedures, views, and functions through a SQL-free UI for inventory, orders, and stock operations. |
+| ✅ | **CancerScope** | A global data-driven initiative uncovering actionable insights into cancer risks, treatment disparities, and patient outcomes through advanced analytics. |
+| ✅ | **GlobePulse Analytics** | A real-time global development monitoring system using automated API pipelines, Python-powered processing, and Power BI dashboards to track economic, health, digital, and environmental indicators. |
+| ✅ | **MedDataRefactor** | End-to-end redesign and migration of hospital operations from Excel-based workflows to a secure, normalized RDBMS with enforced data integrity, RBAC, scheduling validation, and reporting-ready architecture. |
+
 
 
 ---
