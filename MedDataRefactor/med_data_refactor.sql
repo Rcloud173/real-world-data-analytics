@@ -133,13 +133,55 @@ SELECT
 FROM HOSPITAL_DATA
 WHERE `Patients.PatientID` <> '';
 
-select * from patients
+select * from patients;
+
+-- INSERT VALUES INTO APPOINTMENT TABLES
+SELECT CONCAT('SELECT',GROUP_CONCAT(CONCAT('`' , COLUMN_NAME,'`' )),'FROM HOSPITAL_DATA') FROM 
+INFORMATION_SCHEMA.COLUMNS
+WHERE 
+  TABLE_SCHEMA = 'meddata'  
+  AND TABLE_NAME = 'hospital_data'
+  AND COLUMN_NAME LIKE 'APPOINTMENTS.%';
+  
+INSERT INTO APPOINTMENTS(AppointmentID, PATIENTID, DOCTORID,AppointmentTime,Status)
+SELECT`Appointments.AppointmentID`,`Appointments.PatientID`,
+`Appointments.DoctorID`,
+STR_TO_DATE(`Appointments.AppointmentTime`,'%d-%m-%Y %H:%i'),
+`Appointments.Status`FROM HOSPITAL_DATA;
+
+select * from appointments;
 
 
+-- INSERTING VALUE INTO PRESCRIPTIONS
+SELECT CONCAT('SELECT',GROUP_CONCAT(CONCAT('`' , COLUMN_NAME,'`' )),'FROM HOSPITAL_DATA') FROM 
+INFORMATION_SCHEMA.COLUMNS
+WHERE 
+  TABLE_SCHEMA = 'EHIAS'  -- replace with your actual DB
+  AND TABLE_NAME = 'hospital_data'
+  AND COLUMN_NAME LIKE 'PRESCRIPTIONS.%';
+
+INSERT INTO PRESCRIPTIONS (PRECRIPTIONID,AppointmentID,Medication,Dosage)
+SELECT`Prescriptions.PrescriptionID`,`Prescriptions.AppointmentID`,
+`Prescriptions.Medication`,`Prescriptions.Dosage`FROM HOSPITAL_DATA 
+WHERE `Prescriptions.PrescriptionID` <>'';
+
+SELECT * FROM PRESCRIPTIONS;
 
 
+--  INSERT DATA INTO LABREPORTS
+SELECT CONCAT('SELECT',GROUP_CONCAT(CONCAT('`' , COLUMN_NAME,'`' )),'FROM HOSPITAL_DATA') FROM 
+INFORMATION_SCHEMA.COLUMNS
+WHERE 
+  TABLE_SCHEMA = 'EHIAS'  -- replace with your actual DB
+  AND TABLE_NAME = 'hospital_data'
+  AND COLUMN_NAME LIKE 'LABREPORTS.%';
+  
+INSERT INTO LABREPORTS(REPORTID, APPOINTMENTID, REPORTDATA, CREATEDAT)
+SELECT `LabReports.ReportID`,`LabReports.AppointmentID`,`LabReports.ReportData`,
+`LabReports.CreatedAt`FROM HOSPITAL_DATA
+WHERE  `LabReports.ReportID`<>'';
 
-
+SELECT * FROM LABREPORTS
 
 
 
